@@ -1,6 +1,6 @@
 # Autotraino :truck:
 
-> :warning: Warning, alpha version, everything brakes. :warning:
+> :warning: Warning, alpha version, everything breaks. :warning:
 
 
 `autotraino` is a small wrapper library for AutoML on tabular datasets.
