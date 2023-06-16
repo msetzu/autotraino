@@ -1,15 +1,12 @@
 # Autotraino :truck:
 
-> :warning: Warning, alpha version, everything breaks. :warning:
-
-
 `autotraino` is a small wrapper library for AutoML on tabular datasets.
 
 ```python
 from autotraino.gluon import AutogluonTrainer 
 from datasets import load_dataset
 
-train = load_dataset("mstz/adult", "income")["train"].to_pandas() 
+train = load_dataset("mstz/adult", "income")["train"].to_pandas()
 
 # train the model
 trainer = AutogluonTrainer()
@@ -26,7 +23,7 @@ print(trainer.names)
 
 print(trainer["LightGBM"])
 ```
-and predict directly from the `Trainer` itself: 
+and predict directly from the `Trainer` itself:
 ```python
 train_x = train.copy().drop("over_threshold", axis="columns")
 predictions = trainer.predict(train_x, with_models=["LightGBM", "RandomForest"])
@@ -34,19 +31,25 @@ predictions = trainer.predict(train_x, with_models=["LightGBM", "RandomForest"])
 
 
 # Quickstart
-You can install `autotraino` via test-pypi:
+You can install `autotraino` via pypi (strongly recommended to create a virtual environment, see [virtualenvwrapper]
+(https://virtualenvwrapper.readthedocs.io/en/latest/):
 ```shell
-# optional
-mkvirtualenv -p python3.10 autotraino
+pip3.10 install autotraino
+```
+By default, no trainers are installed, to install one use one of
+```shell
+# basic, does not include neural models, catboost, and lightgbm
+pip install autotraino[autogluon]
 
-pip install --extra-index-url https://test.pypi.org/simple/autotraino
+# includes everything
+pip install autotraino[autogluon_all]
 ```
 
 # Datasets
 `autotraino` is based off `pandas.DataFrame`s.
 You can find a large collection on a Huggingface repository I'm curating at [huggingface.co/mstz](https://huggingface.co/mstz).
 Datasets are sourced from UCI, Kaggle, and OpenML.
-Most are still to be updated (especially dataset cards).
+Several are still to be updated (especially dataset cards).
 
 ## What model families to train?
 Currently based on [Autogluon](https://auto.gluon.ai/stable/index.html), `autotraino` currently trains the following models:
@@ -69,5 +72,5 @@ To ease the process, consider setting the appropriate `dtypes` in the input `pan
 
 # In the works
 Future developments include:
- - Fitting arbitrary functions (ray tune)
- - Fitting multi-output models.
+- Fitting arbitrary functions (ray tune)
+- Fitting multi-output models.
