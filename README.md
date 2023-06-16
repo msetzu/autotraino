@@ -28,11 +28,12 @@ and predict directly from the `Trainer` itself:
 train_x = train.copy().drop("over_threshold", axis="columns")
 predictions = trainer.predict(train_x, with_models=["LightGBM", "RandomForest"])
 ```
+`predict` yields an `m x n` numpy array, where each of the `m` rows holds the predictions of a different model.
+Models can be chosen with the parameter `with_models`, if not provided all models are used by default.
 
 
 # Quickstart
-You can install `autotraino` via pypi (strongly recommended to create a virtual environment, see [virtualenvwrapper]
-(https://virtualenvwrapper.readthedocs.io/en/latest/):
+You can install `autotraino` via pypi (strongly recommended to create a virtual environment, see [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)):
 ```shell
 pip3.10 install autotraino
 ```
@@ -40,7 +41,9 @@ By default, no trainers are installed, to install one use one of
 ```shell
 # basic, does not include neural models, catboost, and lightgbm
 pip install autotraino[autogluon]
-
+```
+or
+```shell
 # includes everything
 pip install autotraino[autogluon_all]
 ```
